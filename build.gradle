@@ -1,0 +1,33 @@
+apply plugin: 'gradle-one-jar'
+apply plugin: 'java'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	compile 'io.dropwizard:dropwizard-core:0.8.0-rc2'
+	compile 'io.dropwizard.modules:dropwizard-discovery:0.7.1-5'
+}
+
+task oneJar(type: OneJar) {
+    mainClass = 'kui.hw.Main'
+    archiveName = 'hw-server.jar'	
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}
